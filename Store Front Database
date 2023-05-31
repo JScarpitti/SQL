@@ -1,0 +1,45 @@
+--Create a clothing store database
+
+/**Store Front:
+Skirt (14) red (25)
+Blouse (8) white (15)
+Pants (3) blue (35)
+Heels (5) black (50)
+legginings (20) black (12)
+Headband (3) silver (10)
+socks (20) white (12)
+hats (7) green (15)
+swim trunks (7) purple (20)
+bathingsuit (2) yellow (30)
+tshirt (10) white (12)
+running shoes (5) blue (50)
+shorts (8) black (22)
+belts (10) brown (15)
+earrings (25) silver (8)
+**/
+
+
+CREATE TABLE store_front ( name TEXT, quantity INTEGER, color TEXT, cost INTEGER);
+
+INSERT INTO store_front VALUES ("skirt", 14, "red", 25);
+INSERT INTO store_front VALUES ("blouse", 8, "white", 15);
+INSERT INTO store_front VALUES ("pants", 3, "blue", 35);
+INSERT INTO store_front VALUES ("heels", 5, "black", 50);
+INSERT INTO store_front VALUES ("leggings", 20, "black", 12);
+INSERT INTO store_front VALUES ("headband", 3, "silver", 10);
+INSERT INTO store_front VALUES ("socks", 20, "white", 12);
+INSERT INTO store_front VALUES ("hats", 7, "green", 15);
+INSERT INTO store_front VALUES ("swim trunks", 7, "purple", 20);
+INSERT INTO store_front VALUES ("bathingsuit", 2, "yellow", 30);
+INSERT INTO store_front VALUES ("tshirt", 10, "white", 12);
+INSERT INTO store_front VALUES ("running shoes", 5, "blue", 50);
+INSERT INTO store_front VALUES ("shorts", 8, "black", 22);
+INSERT INTO store_front VALUES ("belts", 10, "browns", 15);
+INSERT INTO store_front VALUES ("earrings", 25, "silver", 8);
+SELECT * FROM store_front;
+
+--display the database ordered by cost.
+SELECT*FROM store_front ORDER BY cost;
+
+--what is the total items in the store.
+SELECT quantity, sum (quantity) FROM store_front;
