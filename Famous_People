@@ -1,0 +1,54 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE albums (id INTEGER PRIMARY KEY AUTOINCREMENT, full_name TEXT, title TEXT);
+
+INSERT into albums (full_name, title) VALUES ("Taylor Swift", "Midnights");
+INSERT into albums (full_name, title) VALUES ("Miley Cyrus", "Breakout");
+INSERT into albums (full_name, title) VALUES ("George Ezra", "Gold Rush Kid");
+INSERT into albums (full_name, title) VALUES ("Darius Rucker", "When Was The Last Time");
+INSERT into albums (full_name, title) VALUES ("John Legend", "Love In The Future");
+INSERT into albums (full_name, title) VALUES ("Post Malone", "Hollywood's Bleeding");
+
+CREATE TABLE born (id INTEGER PRIMARY KEY AUTOINCREMENT, year INTEGER, place TEXT);
+INSERT into born (year, place) VALUES (1989, "Pennsylvania");
+INSERT into born (year, place) VALUES (1992, "Tennessee");
+INSERT into born (year, place) VALUES (1993, "England");
+INSERT into born (year, place) VALUES (1966, "South Carolina");
+INSERT into born (year, place) VALUES (1978, "Ohio");
+INSERT into born (year, place) VALUES (1995, "New York");
+
+--Join the two tables-- 
+SELECT * FROM albums
+JOIN born
+ON albums.id=born.id;
+
+CREATE table friends (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name1_id INTEGER,
+    full_name2_id INTEGER);
+
+INSERT INTO friends (full_name1_id, full_name2_id)
+    VALUES (1, 5);
+INSERT INTO friends (full_name1_id, full_name2_id)
+    VALUES (2, 3);
+INSERT INTO friends (full_name1_id, full_name2_id)
+    VALUES (4, 6);
+ 
+ --Create a table of artist friends--   
+    SELECT a.full_name, b.full_name
+    FROM friends
+    JOIN albums a
+    ON friends.full_name1_id=a.id
+    Join albums b
+    ON friends.full_name2_id=b.id;
+
+--Where was each artist born?--
+SELECT albums.full_name, born.place FROM albums
+JOIN born
+ON albums.id=born.id;
+
+--artists by age--
+SELECT albums.full_name, born.year FROM albums
+JOIN born
+on albums.id=born.id
+ORDER BY year ASC;
