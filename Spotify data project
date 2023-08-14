@@ -1,0 +1,78 @@
+# The table used to create this project was downloaded from Kaggle.
+# I used the Spotify chart information to answer some antalytics questions with SQL.
+# Below I have attached the table I used.
+
+###Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+--Select all the information from the Spotifydat table--
+SELECT *
+FROM BIT_DB.Spotifydata;
+
+--List the tracks from most popular to least--
+Select track_name AS Track
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc;
+
+--What track has the most danceability and what is its energy?--
+SELECT track_name, energy
+FROM BIT_DB.Spotifydata
+ORDER BY danceability
+LIMIT 1;
+
+--Categorize the tracks based on popularity--
+SELECT COUNT(*),
+CASE
+WHEN popularity >89 THEN 'Top Hits'
+WHEN popularity >79 THEN 'Popular'
+ELSE 'low Popularity'
+END AS 'Hits_chart'
+FROM BIT_DB.Spotifydata
+GROUP BY Hits_chart;
+
+--What is the average duration per track--
+SELECT AVG(duration_ms)
+FROM BIT_DB.Spotifydata;
+
+--Name 5 artist with about average duration on their track--
+SELECT artist_name
+FROM BIT_DB.Spotifydata
+WHERE duration_ms>(SELECT AVG(duration_ms)
+FROM BIT_DB.Spotifydata)
+LIMIT 5;
+
+--How many songs does Lil Nas X have on the chart?--
+SELECT COUNT(*)
+FROM BIT_DB.Spotifydata
+WHERE artist_name='Lil Nas X';
+
+--Which artists have more than one song on the chart?--
+SELECT DISTINCT artist_name
+FROM BIT_DB.Spotifydata
+WHERE artist_name>1;
+
+--Which track had the slowest tempo and what was the tempo?--
+SELECT track_name, tempo
+FROM BIT_DB.Spotifydata
+GROUP BY track_name
+ORDER BY tempo
+LIMIT 1;
