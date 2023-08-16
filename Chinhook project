@@ -1,0 +1,49 @@
+
+
+--What Countries are the customers from?--
+SELECT DISTINCT Country
+FROM chinook.customers;
+
+--Show the customers that are NOT from the US, iclude their full name, customer ID, and country--
+SELECT FirstName, LastName, CustomerID, Country
+FROM chinook.customers
+WHERE Country <> "USA";
+
+--List the customers last name, first name, and email. Order alphabetically by last name--
+SELECT LastName, FirstName, Email
+FROM chinook.customers
+ORDER BY LastName ASC;
+
+--Find the invoices for the customers from Canada. Also, show their last name and email--
+SELECT inv.InvoiceId, cust.LastName, cust.Email
+FROM chinook.invoices AS inv
+LEFT JOIN chinook.customers AS cust
+ON inv.Customerid=cust.Customerid
+WHERE inv.BillingCountry = "Canada";
+
+--Who was the last employee to be hired?
+SELECT FirstName, LastName
+FROM chinook.employees
+ORDER BY HireDate DESC
+LIMIT 1;
+
+--Show the employees who are Sales Agents--
+SELECT*
+FROM chinook.employees
+WHERE Title LIKE '%Agent';
+
+--Show the artist next to their album--
+SELECT albums.title, artists.name
+FROM chinook.albums
+LEFT JOIN chinook.artists
+ON albums.ArtistID=artists.ArtistID;
+
+--Write a query that includes the purchased track name AND artist name with each invoice line ID.--
+SELECT ar.name as Artist, t.Name as Track, i.InvoiceLineId
+FROM chinook.Invoice_items i
+LEFT JOIN chinook.tracks t 
+ON i.TrackID=t.TrackID
+INNER JOIN chinook.albums a
+ON a.AlbumID=t.AlbumID
+LEFT JOIN chinook.artists ar
+ON ar.ArtistID=a.ArtistID;
