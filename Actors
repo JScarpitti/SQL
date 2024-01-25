@@ -1,0 +1,44 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE actors (id INTEGER PRIMARY KEY AUTOINCREMENT, full_name TEXT, age INTEGER, birth_place TEXT);
+
+INSERT into actors (full_name, age, birth_place) VALUES ("Kristen Bell", 43, "Michigan, US");
+INSERT into actors (full_name, age, birth_place) VALUES ("Kevin Bacon", 65, "Pennsylvania, US");
+INSERT into actors (full_name, age, birth_place) VALUES ("Ryan Gosling", 43, "Canada");
+INSERT into actors (full_name, age, birth_place) VALUES ("Timothee Chalamet", 28, "New York,US");
+INSERT into actors (full_name, age, birth_place) VALUES ("Natalie Portman", 42, "Jerusalem");
+INSERT into actors (full_name, age, birth_place) VALUES ("Sophia Vegara", 51, "Colombia");
+
+CREATE TABLE movies (actor_id INTEGER, number_movies INTEGER, genre TEXT);
+INSERT into movies (actor_id, number_movies, genre) VALUES (1, 46, "comedy");
+INSERT into movies (actor_id, number_movies, genre) VALUES (2, 61, "drama");
+INSERT into movies (actor_id, number_movies, genre) VALUES (3, 64, "drama");
+INSERT into movies (actor_id, number_movies, genre) VALUES (4, 27, "drama");
+INSERT into movies (actor_id, number_movies, genre) VALUES (5, 52, "drama");
+INSERT into movies (actor_id, number_movies, genre) VALUES (6, 24, "comedy");
+
+--Select the actors from oldest to youngest
+SELECT full_name, age
+FROM actors
+ORDER BY age DESC;
+
+-- Select actors from oldest to youngest and how many movies they have been in
+SELECT actors.full_name, actors.age, movies.number_movies
+FROM actors
+JOIN movies
+ON actors.id=movies.actor_id
+ORDER BY age DESC;
+
+--What actors have made over 40 drama movies
+SELECT actors.full_name, movies.number_movies, movies.genre
+FROM actors
+JOIN movies
+ON actors.id=movies.actor_id
+WHERE number_movies>50
+AND genre='drama';
+
+--Select the actors who were born outside the US
+SELECT full_name, birth_place
+FROM actors
+WHERE birth_place NOT LIKE '%US%';
+
