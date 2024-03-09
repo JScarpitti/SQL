@@ -57,3 +57,46 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+#ANALYSIS
+
+--What are the average PTO days--
+SELECT AVG(paid_time_off_days)
+FROM fortune_companies; 
+
+--What is the min amount of PTO days?--
+SELECT MIN(paid_time_off_days)
+FROM fortune_companies;
+
+--What is the max amount of PTO days?--
+SELECT MAX(paid_time_off_days)
+FROM fortune_companies;
+
+--Assign all the companies based on average PTO--
+SELECT company_name, paid_time_off_days,
+CASE 
+WHEN paid_time_off_days >= 20 THEN "above average pto"
+WHEN paid_time_off_days >= 17 THEN "average PTO"
+ELSE "below average PTO"
+END AS PTO
+FROM fortune_companies
+ORDER BY paid_time_off_days DESC;
+
+--Show all the companies in the technology industry that provide benefits and at least 12 weeks maternity leave--
+SELECT company_name
+FROM fortune_companies
+WHERE maternity_leave_weeks >=12
+AND healthcare_benefits=1
+AND industry='Technology';
+
+--How many companies in each industry provide healthcare benefits?
+SELECT industry, COUNT(healthcare_benefits)
+FROM fortune_companies
+WHERE healthcare_benefits=1
+GROUP BY industry;
+
+--What is the average revenue per industry--
+SELECT industry, ROUND(AVG(revenue))
+FROM fortune_companies
+GROUP BY industry
+ORDER BY revenue DESC;
