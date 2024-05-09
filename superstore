@@ -58,3 +58,13 @@ SELECT MAX (item_name), price
 FROM superstore
 GROUP BY price DESC
 LIMIT 1;
+
+**How many air purifiers are in stock?
+SELECT stock_quantity
+FROM superstore
+WHERE item_name='Air Purifier';
+
+**What is the cost of all the cozy throw blankets?
+SELECT SUM(price*stock_quantity)
+FROM superstore
+WHERE item_name='Cozy Throw Blanket';
