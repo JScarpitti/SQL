@@ -48,7 +48,7 @@ SELECT item_name, average_rating
 FROM superstore
 WHERE average_rating > '4.49';
 
-**How uch stock does the store have in the electronics category?
+**How much stock does the store have in the electronics category?
 SELECT SUM (stock_quantity)
 FROM superstore
 WHERE category = 'Electronics';
