@@ -73,14 +73,13 @@ SELECT MAX(paid_time_off_days)
 FROM fortune_companies;
 
 --Assign all the companies based on average PTO--
-SELECT company_name, paid_time_off_days,
+SELECT count(*),
 CASE 
 WHEN paid_time_off_days >= 20 THEN "above average pto"
 WHEN paid_time_off_days >= 17 THEN "average PTO"
-ELSE "below average PTO"
-END AS PTO
+ELSE "below average PTO" END AS "PTO"
 FROM fortune_companies
-ORDER BY paid_time_off_days DESC;
+GROUP BY PTO;
 
 --Show all the companies in the technology industry that provide benefits and at least 12 weeks maternity leave--
 SELECT company_name
